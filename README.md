@@ -11,5 +11,5 @@ The files grew too large and is not included here, even if part one was done wit
 Day 6 and 7 was done in Excel and not too bad.
 On the eight day, he was very disappointed with Excel's ability to work with arrays 
 and do string lookups and replacements. Part one was easy, but part two was not.
-Here, I setup a basic kotlin project and completed it with the more capable Kotlin.
+Here, I set up a basic kotlin project and completed it with the more capable Kotlin.
 
