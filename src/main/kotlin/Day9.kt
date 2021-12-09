@@ -18,7 +18,7 @@ object Day9 {
         println(lowPoints.map { mapBasin(matrix, it) }
             .sortedDescending()
             .take(3)
-            .reduce { acc, i -> acc * i  }
+            .reduce { acc, i -> acc * i }
         )
     }
 
@@ -30,8 +30,9 @@ object Day9 {
                 if (map[i - 1][j] > current &&
                     map[i + 1][j] > current &&
                     map[i][j + 1] > current &&
-                    map[i][j - 1] > current) {
-                    lowPoints.add(Pair(i,j))
+                    map[i][j - 1] > current
+                ) {
+                    lowPoints.add(Pair(i, j))
                 }
             }
         }
@@ -41,7 +42,7 @@ object Day9 {
     fun mapBasin(map: List<List<Int>>, lowPoint: Pair<Int, Int>): Int {
         val basinCoords = mutableSetOf(lowPoint)
         var previousSize = 0
-        while(previousSize != basinCoords.size) {
+        while (previousSize != basinCoords.size) {
             previousSize = basinCoords.size
             val toAdd = mutableSetOf<Pair<Int, Int>>()
             basinCoords.forEach { (x, y) ->
