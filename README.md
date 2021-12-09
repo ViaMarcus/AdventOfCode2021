@@ -7,6 +7,7 @@ Day 3 and 4 were not too bad.
 
 Day 5 was horrible to do in Excel. 
 The files grew too large and is not included here, even if part one was done with it.
+It was done a bit late, but not never.
 
 Day 6 and 7 was done in Excel and not too bad.
 
