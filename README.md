@@ -17,3 +17,6 @@ Here, I set up a basic kotlin project and completed it with the more capable Kot
 
 On the ninth day, the Excel hope lived again, but died shortly after starting part 2...
 It was a helpful tool in thinking about the solution however.
+
+Day 10 was completed without much ado. Here it was interesting to compare my solution with my friend,
+as we had quite different approaches to the problem.
