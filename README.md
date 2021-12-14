@@ -20,3 +20,7 @@ It was a helpful tool in thinking about the solution however.
 
 Day 10 was completed without much ado. Here it was interesting to compare my solution with my friend,
 as we had quite different approaches to the problem.
+
+On day 14, I had not yet done day 11-13 to completion, but was enticed to start by my friend.
+I noticed quickly it was similar to the reproducing fish from day 6, and solved part 2 in a similar way, 
+although not in Excel, after doing part 1 the naive way.
