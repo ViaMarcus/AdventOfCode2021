@@ -24,3 +24,6 @@ as we had quite different approaches to the problem.
 On day 14, I had not yet done day 11-13 to completion, but was enticed to start by my friend.
 I noticed quickly it was similar to the reproducing fish from day 6, and solved part 2 in a similar way, 
 although not in Excel, after doing part 1 the naive way.
+
+Day 15 was a fun one, ending up not flattening my recursion but instead going to ever deeper depths by using Kotlin's
+DeepRecursionFunction.
