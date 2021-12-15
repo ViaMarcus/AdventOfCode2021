@@ -1,8 +1,11 @@
+import java.lang.Integer.max
+
 @OptIn(ExperimentalStdlibApi::class)
 object Day15 {
 	fun solvePart1() {
 		val lines = object {}::class.java.getResource("inputDay15.txt")!!.readText().lines()
 		val map = lines.map { it.toCharArray().map { char -> Integer.parseInt(char.toString()) } }
+		println(map.flatten().average())
 		solve(map)
 	}
 
@@ -25,6 +28,7 @@ object Day15 {
 				newLines.add(newLine)
 			}
 		}
+		println(newLines.flatten().average())
 		solve(newLines)
 	}
 
@@ -46,13 +50,20 @@ object Day15 {
 		println(nodeMap[Pair(xSize - 1, ySize - 1)]!!.min)
 	}
 
-	private val update = DeepRecursiveFunction<Node, Unit> { node ->
+	private val update = DeepRecursiveFunction<Node, Int> { node ->
 		val newMin = node.neighbours.minByOrNull { it.min }!!.min + node.weight
 		val didUpdate = node.min > newMin
 		if (didUpdate) {
 			node.min = newMin
 		}
-		if (didUpdate || node.start) node.neighbours.toSet().forEach { callRecursive(it) }
+		var depth = 1
+		if (didUpdate || node.start) node.neighbours.forEach {
+			it.let { nude ->
+				depth = max(callRecursive(nude) + 1, depth)
+			}
+		}
+		if (depth % 10_000 == 0) println(depth)
+		return@DeepRecursiveFunction depth
 	}
 
 	class Node(
