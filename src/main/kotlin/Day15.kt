@@ -1,4 +1,5 @@
 import java.lang.Integer.max
+import kotlin.system.exitProcess
 
 @OptIn(ExperimentalStdlibApi::class)
 object Day15 {
@@ -29,7 +30,7 @@ object Day15 {
 			}
 		}
 		println(newLines.flatten().average())
-		solve(newLines)
+		solve2(newLines)
 	}
 
 	private fun solve(map: List<List<Int>>) {
@@ -64,6 +65,41 @@ object Day15 {
 		}
 		if (depth % 10_000 == 0) println(depth)
 		return@DeepRecursiveFunction depth
+	}
+
+	fun solve2(map: List<List<Int>>) {
+		val ySize = map.size
+		val naiveMin = map[0].reduce { acc, i -> acc + i } + map.map { it[0] }.reduce { acc, i -> acc + i }
+		val xSize = map.first().size
+		val nodeMap = mutableMapOf<Pair<Int, Int>, Node>()
+		for (y in 0 until ySize) {
+			for (x in 0 until xSize) {
+				val node = Node(x = x, y = y, weight = map[y][x])
+				nodeMap[Pair(x, y)] = node
+			}
+		}
+		val list: Array<MutableList<Node>> = Array(naiveMin) { mutableListOf() }
+		println(list.size)
+
+		val start = nodeMap[Pair(0, 0)]!!
+		val end = nodeMap[Pair(xSize - 1, ySize - 1)]
+		start.setNeighbours(nodeMap)
+		start.min = 0
+		list[0].add(start)
+		for (i in list.indices) {
+			list[i].forEach { nowNode ->
+				if (nowNode == end) { println(nowNode.min); exitProcess(0) } // we are done
+
+				nowNode.setNeighbours(nodeMap)
+				nowNode.neighbours.forEach { neigh ->
+					if (neigh.min > nowNode.min + neigh.weight) {
+						neigh.min = nowNode.min + neigh.weight
+						list[neigh.min].add(neigh)
+					}
+				}
+			}
+		}
+
 	}
 
 	class Node(
