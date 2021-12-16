@@ -11,26 +11,27 @@ object Day16 {
 		println("size of binary input is $binaryInputLength")
 		println(binary)
 		val iter = binary.toIntArray().iterator()
-		while (iter.hasNext()) {
-			readPackagePart1(iter)
-		}
+		val result = readPackage(iter)
+		println(result)
 	}
 
-	private fun readPackagePart1(iter: IntIterator) {
+	private fun readPackage(iter: IntIterator): Long {
 		try {
 			val typeId = readHeaders(iter)
 			println("Package with typeId $typeId was read")
-			when (typeId) {
+			return when (typeId) {
+				0 -> readOperator(iter).reduce { acc, l -> acc + l }
+				1 -> readOperator(iter).reduce { acc, l -> acc * l }
+				2 -> readOperator(iter).minOrNull()!!
+				3 -> readOperator(iter).maxOrNull()!!
 				4 -> readLiteral(iter)
-				else -> readOperator(iter)
+				5 -> readOperator(iter).reduce { val1, val2 -> return@reduce if (val1 > val2) 1 else 0 }
+				6 -> readOperator(iter).reduce { val1, val2 -> return@reduce if (val1 < val2) 1 else 0 }
+				else -> readOperator(iter).reduce { val1, val2 -> return@reduce if (val1 == val2) 1 else 0 }
 			}
 		} finally {
 			println("EOF reached, totalVer is now $totalVer, ")
 		}
-	}
-
-	private fun readPackagePart2() {
-
 	}
 
 	private fun readHeaders(iter: IntIterator): Int {
@@ -39,8 +40,9 @@ object Day16 {
 		return 4 * iter.next() + 2 * iter.next() + iter.next() // typeId
 	}
 
-	private fun readOperator(iter: IntIterator) {
+	private fun readOperator(iter: IntIterator): List<Long> {
 		val lengthTypeId = iter.next()
+		val list = mutableListOf<Long>()
 		println("op with lenId = $lengthTypeId")
 		if (lengthTypeId == 0) {
 			val length = readNBits(iter, 15).toInt(2)
@@ -48,15 +50,15 @@ object Day16 {
 			println(subPackages)
 			val subPackagesIter = subPackages.map { it.digitToInt() }.toIntArray().iterator()
 			while (subPackagesIter.hasNext()) {
-				readPackagePart1(subPackagesIter)
+				list.add(readPackage(subPackagesIter))
 			}
 		} else {
 			val numberOfSubPacks = readNBits(iter, 11).toInt(2)
 			repeat(numberOfSubPacks) {
-				readPackagePart1(iter)
+				list.add(readPackage(iter))
 			}
 		}
-
+		return list
 	}
 
 	private fun readLiteral(iter: IntIterator): Long {

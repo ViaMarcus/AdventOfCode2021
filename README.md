@@ -16,7 +16,7 @@ and do string lookups and replacements. Part one was easy, but part two was not.
 Here, I set up a basic kotlin project and completed it with the more capable Kotlin.
 
 On the ninth day, the Excel hope lived again, but died shortly after starting part 2...
-It was a helpful tool in thinking about the solution however.
+It was a helpful tool in thinking about the solution, however.
 
 Day 10 was completed without much ado. Here it was interesting to compare my solution with my friend,
 as we had quite different approaches to the problem.
@@ -27,3 +27,6 @@ although not in Excel, after doing part 1 the naive way.
 
 Day 15 was a fun one, ending up not flattening my recursion but instead going to ever deeper depths by using Kotlin's
 DeepRecursionFunction.
+
+Day 16 was much fun, lots of lovely recursion and nesting. Had some issues with finding the padding zeroes but nothing
+a try finally with prints can't get around.
