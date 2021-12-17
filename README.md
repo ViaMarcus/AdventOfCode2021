@@ -30,3 +30,7 @@ DeepRecursionFunction.
 
 Day 16 was much fun, lots of lovely recursion and nesting. Had some issues with finding the padding zeroes but nothing
 a try finally with prints can't get around.
+
+Day 17 was interesting. Started to solve it by code until I realized it was easy to calculate the highest point based
+on the highest velocity the probe was allowed to have after returning to y=0 and then doing a single large step.
+But then part two needed the code I had started writing for part 1, so that was fine.
