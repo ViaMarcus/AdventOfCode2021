@@ -1,7 +1,7 @@
 object Day20 {
 	var key: List<Int>? = null
 
-	fun part1() {
+	fun part(its: Int) {
 		val lines = object {}::class.java.getResource("inputDay20.txt")!!
 			.readText()
 			.lines()
@@ -13,42 +13,44 @@ object Day20 {
 		val imageLines = lines
 			.takeLast(lines.size - 2)
 			.toMutableList()
+
+		// Initial padding
 		val lineSize = imageLines[0].length
 		val paddingLine = ".".repeat(lineSize)
-		val paddingSize = 53
+		val paddingSize = 3
 		repeat(paddingSize) { imageLines.add(0, paddingLine)}
 		repeat(paddingSize) { imageLines.add(paddingLine) }
 		val paddingString = ".".repeat(paddingSize)
-		val image = imageLines.map { line ->
+		var image = imageLines.map { line ->
 			(paddingString + line + paddingString).toCharArray().map { if (it == '#') 1 else 0 }
+		}.toMutableList()
+		repeat(its) {
+			println("iteration $it")
+			// Map to new image
+			val background = image[0][0]
+			var xIndices = image[0].indices
+			var yIndices = image.indices
+			image.forEach { printImage(it) }
+			val newImage: MutableList<MutableList<Int>> = mutableListOf()
+			val padder = get3x3Char(image, 0, 0,  background)
+			val paddingLine = Array(image[0].size + 2) { padder }.toMutableList()
+			newImage.add(paddingLine)
+			for (y in yIndices ) {
+				val line = mutableListOf<Int>()
+				line.add(padder)
+				for (x in xIndices) {
+					line.add(get3x3Char(image, x, y,  background))
+				}
+				line.add(padder)
+				newImage.add(line)
+			}
+			newImage.add(paddingLine)
+			image.clear()
+			image.addAll(newImage)
+			image.forEach { printImage(it) }
 		}
 
-		var xIndices = image[0].indices
-		var yIndices = image.indices
-		image.forEach { printImage(it) }
-		val newImage: MutableList<MutableList<Int>> = mutableListOf()
-		for (y in yIndices ) {
-			val line = mutableListOf<Int>()
-			for (x in xIndices) {
-				line.add(get3x3Char(image, x, y,  0))
-			}
-			newImage.add(line)
-		}
-		repeat(2) { println() }
-		newImage.forEach { printImage(it) }
-		xIndices = newImage[0].indices
-		yIndices = newImage.indices
-		val newImage2: MutableList<MutableList<Int>> = mutableListOf()
-		for (y in yIndices ) {
-			val line = mutableListOf<Int>()
-			for (x in xIndices) {
-				line.add(get3x3Char(newImage, x, y, 1))
-			}
-			newImage2.add(line)
-		}
-		repeat(2) { println() }
-		newImage2.forEach { printImage(it) }
-		val pixelCount = newImage2.sumOf { line -> line.sumOf { it } }
+		val pixelCount = image.sumOf { line -> line.sumOf { it } }
 		println(pixelCount)
 	}
 
@@ -71,7 +73,7 @@ object Day20 {
 	private fun getCoordinateOrDefault(image: List<List<Int>>, x: Int, y: Int, default: Int): Int {
 		val xIndices = image[0].indices
 		val yIndices = image.indices
-
+		// Assume anything out of bounds is the default
 		return if (x in xIndices && y in yIndices) image[y][x] else default
 	}
 
