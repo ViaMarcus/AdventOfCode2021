@@ -6,8 +6,9 @@ fun main(args: Array<String>) {
 	// Day11.solvePart1()
 	// Day14.solvePart2()
 	// Day15.solvePart2()
-	//Day16.part1()
-	Day17.part2()
+	// Day16.part1()
+	// Day17.part2()
+	Day18.part2()
 }
 
 
