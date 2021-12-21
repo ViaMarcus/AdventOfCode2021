@@ -34,3 +34,11 @@ a try finally with prints can't get around.
 Day 17 was interesting. Started to solve it by code until I realized it was easy to calculate the highest point based
 on the highest velocity the probe was allowed to have after returning to y=0 and then doing a single large step.
 But then part two needed the code I had started writing for part 1, so that was fine.
+
+Day 18 was a nightmare to debug, forcing me to write some basic unit tests.
+
+Day 19 is yet to be done.
+
+Day 20 was quite simple, with some visual debugging.
+
+Day 21 was quite similar to day 14 and 6, but with much more complexity in how the data structure split and incremented.
