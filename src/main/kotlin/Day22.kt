@@ -40,7 +40,7 @@ object Day22 {
 	}
 
 	fun part2() {
-		val operation = getInput("inputDay22.txt", false)
+		val operation = getInput("alexDay22.txt", false)
 		val onBlocks = mutableListOf<VoxelBlock>()
 
 		operation.forEachIndexed { index, newOp ->
@@ -49,13 +49,13 @@ object Day22 {
 			val operationBlock = VoxelBlock(newOp)
 			val newOnBlocks = mutableSetOf<VoxelBlock>()
 			val blocksToRemove = mutableSetOf<VoxelBlock>()
-			onBlocks.forEach { onBlock ->
+			onBlocks.stream().parallel().forEach { onBlock ->
 				onBlock.getIntersect(operationBlock)?.let { intersect ->
 					if (log) println("$newOp on \n$onBlock gave intersect \n$intersect")
 					blocksToRemove.add(onBlock)
 					val subChunks = onBlock.removeChunk(intersect)
 					if (log) println("generated $subChunks new chunks")
-					newOnBlocks.addAll(subChunks)
+					synchronized(Any()) { newOnBlocks.addAll(subChunks) }
 				}
 			}
 			if (log) println("adding ${newOnBlocks.size} new blocks")
