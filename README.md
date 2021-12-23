@@ -42,3 +42,9 @@ Day 19 is yet to be done.
 Day 20 was quite simple, with some visual debugging.
 
 Day 21 was quite similar to day 14 and 6, but with much more complexity in how the data structure split and incremented.
+
+Day 22 took a lot of compute for me. And a lot of tweaking ranges with inclusive or exclusive. I found here that my
+unit tests gave me a lot of confidence in my methods, and, while my tests initially did not find some edge cases 
+correctly, after figuring that out, fixing the tests and adjusting my ranges a bit, I got the test data correct.
+Then it was just a matter of running the program on the live data, for about 25 minutes... 
+Not sure what makes it so slow, but I only needed to run it once, so that is good.

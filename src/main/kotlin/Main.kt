@@ -10,7 +10,8 @@ fun main(args: Array<String>) {
 	// Day17.part2()
 	// Day18.part2()
 	// Day20.part(50)
-	Day21.part2()
+	//Day21.part2()
+	Day22.part2()
 }
 
 
